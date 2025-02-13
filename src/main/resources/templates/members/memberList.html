@@ -12,13 +12,28 @@
         <th>No</th>
         <th>Name</th>
         <th>Address</th>
+        <th>Del</th>
+        <th>Update</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>아무개</td>
-        <td>모름</td>
+      <tr th:each="member : ${memberList}">
+        <td th:text="${member.id}">1</td>
+        <td th:text="${member.name}">아무개</td>
+        <td th:text="${member.address}">모름</td>
+        <td>
+          <a th:href="@{/members/delete/{id}(id=${member.id})}">
+            <button>삭제</button>
+          </a>
+        </td>
+        <td>
+          <a th:href="@{|/members/update/${member.id}|}">
+            <button>수정</button>
+          </a>
+        </td>
+      </tr>
+      <tr th:if="${memberList.size() == 0}">
+        <td colspan="5">표시해야할 데이터가 없습니다.</td>
       </tr>
     </tbody>
   </table>
